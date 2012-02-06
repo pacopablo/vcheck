@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Inflight Entertainment &mdash; vCheck 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="vCheck 0.1 documentation" href="index.html" />
+    <link rel="next" title="Further Reading" href="further_reading.html" />
+    <link rel="prev" title="Crusing Altitude" href="mor.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="further_reading.html" title="Further Reading"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mor.html" title="Crusing Altitude"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">vCheck 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="inflight-entertainment">
+<h1>Inflight Entertainment<a class="headerlink" href="#inflight-entertainment" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="host-networking">
+<h2>Host Networking<a class="headerlink" href="#host-networking" title="Permalink to this headline">¶</a></h2>
+<p>When dealing with the host networking config, we first start off with an
+<a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html">HostSystem</a> <a class="reference internal" href="glossary.html#term-managed-entity"><em class="xref std std-term">managed entity</em></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">filter</span> <span class="o">=</span> <span class="n">NameValueCollection</span><span class="p">()</span>
+<span class="nb">filter</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&#39;Name&#39;</span><span class="p">,</span> <span class="s">&#39;lothlorien&#39;</span><span class="p">)</span>
+<span class="n">host_system</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FindEntityView</span><span class="p">(</span><span class="n">VMware</span><span class="o">.</span><span class="n">Vim</span><span class="o">.</span><span class="n">HostSystem</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above selected the <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html">HostSystem</a> <a class="reference internal" href="glossary.html#term-managed-entity"><em class="xref std std-term">Managed Entity</em></a> which
+corresponds to the host whose name contains <tt class="docutils literal"><span class="pre">lothlorien</span></tt>.  The
+<a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html">HostSystem</a> object gives us access to multiple <em>MOR</em>s.</p>
+<p><tt class="docutils literal"><span class="pre">host.ConfigManager.NetworkSystem</span></tt></p>
+</div>
+<div class="section" id="data-objects">
+<h2>Data Objects<a class="headerlink" href="#data-objects" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">NetworkConfig.Vswitch</span></tt></p>
+<blockquote>
+<div><p><strong>Properties</strong></p>
+<ul class="simple">
+<li>Name</li>
+<li>Spec<ul>
+<li>Policy<ul>
+<li>NicTeaming</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">NetowrkConfig.Portgroup</span></tt></p>
+<blockquote>
+<div><p><strong>Properties</strong></p>
+<ul class="simple">
+<li>Spec<ul>
+<li>Name</li>
+<li>VlanId</li>
+<li>VswitchName</li>
+<li>Policy<ul>
+<li>Security<ul>
+<li>AllowPromiscuous</li>
+<li>ForgedTransmits</li>
+<li>MacChanges</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">NetworkConfig.Vnic</span></tt></p>
+<blockquote>
+<div><p><strong>Properties</strong></p>
+<ul class="simple">
+<li>Device</li>
+<li>Portgroup</li>
+<li>Spec<ul>
+<li>Ip<ul>
+<li>Dhcp</li>
+<li>IpAddress</li>
+<li>IpV6Config</li>
+<li>SubnetMask</li>
+</ul>
+</li>
+<li>Mtu</li>
+<li>Portgroup</li>
+<li>TsoEnabled</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">NetworkConfig.Pnic</span></tt></p>
+</div>
+<div class="section" id="vnic-stuff">
+<h2>VNic Stuff<a class="headerlink" href="#vnic-stuff" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">host.ConfigManager.VirtualNicManager</span></tt> produces a <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNicManager.html">HostVirtualNicManager</a>.
+The <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNicManager.html">HostVirtualNicManager</a> contains methods for selecting the vnics used for
+vMotion, Management, and Fault Tolerance.</p>
+<p>Find the vnic used for vMotion:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">vnm</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">GetView</span><span class="p">(</span><span class="n">host</span><span class="o">.</span><span class="n">ConfigManager</span><span class="o">.</span><span class="n">VirtualNicManager</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">vmotion_nic</span> <span class="o">=</span> <span class="n">vnm</span><span class="o">.</span><span class="n">QueryNetConfig</span><span class="p">(</span><span class="s">&#39;vmotion&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This gives us a <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNicManager.NetConfig.html">VirtualNicManagerNetConfig</a> object.  The
+<a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNicManager.NetConfig.html">VirtualNicManagerNetConfig</a> object tells us the following information;</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">.NicType</span></tt>: The <tt class="docutils literal"><span class="pre">nicType</span></tt>; <tt class="docutils literal"><span class="pre">management</span></tt>, <tt class="docutils literal"><span class="pre">vmotion</span></tt>, or
+<tt class="docutils literal"><span class="pre">faultToleranceLogging</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">.MultiSelectAllowd</span></tt>: Whether or not multiple vnics are allowed to be
+selected for the given <tt class="docutils literal"><span class="pre">nicType</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">.CandidateVnic</span></tt>: A list of <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNic.html">HostVirtualNic</a> objects that are available to
+be selected.</li>
+<li><tt class="docutils literal"><span class="pre">.SelectedVnic</span></tt>: An Array[str] of vnic <tt class="docutils literal"><span class="pre">Key</span></tt> strings that are selected
+for the given nic type.</li>
+</ul>
+<p>The <tt class="docutils literal"><span class="pre">Key</span></tt> value stored in the <tt class="docutils literal"><span class="pre">.SelectedVnic</span></tt> Array is not available via
+<tt class="docutils literal"><span class="pre">NetworkConfig.Vnic</span></tt>.  Neither is the <tt class="docutils literal"><span class="pre">Key</span></tt> values passed to
+<tt class="docutils literal"><span class="pre">DeselectVnicForType</span></tt> nor <tt class="docutils literal"><span class="pre">SelectVnicForType</span></tt>. <tt class="docutils literal"><span class="pre">DeselectVnicForType</span></tt> and
+<tt class="docutils literal"><span class="pre">SelectVnicForType</span></tt> us the <tt class="docutils literal"><span class="pre">Device</span></tt> name.</p>
+<p>Fortunately, the <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNic.html">HostVirtualNic</a> object contains the <tt class="docutils literal"><span class="pre">Device</span></tt> name, <tt class="docutils literal"><span class="pre">Key</span></tt>
+and the <tt class="docutils literal"><span class="pre">Portgroup</span></tt> of the vnic.  To associate the selected nic with a given
+portgroup, one can loop through the <tt class="docutils literal"><span class="pre">.CandidateVnic</span></tt> list and look for the
+vnic with the selected key.</p>
+<p>Select a Vnic for a given use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mgmt_nic</span> <span class="o">=</span> <span class="n">vnm</span><span class="o">.</span><span class="n">QueryNetConfig</span><span class="p">(</span><span class="s">&#39;management&#39;</span><span class="p">)</span>
+<span class="n">dev</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">mgmt_nic</span><span class="o">.</span><span class="n">CandidateVnic</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">Portgroup</span> <span class="o">==</span> <span class="s">&#39;EG_MGMT&#39;</span><span class="p">:</span>
+        <span class="n">dev</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">Device</span>
+        <span class="k">break</span>
+    <span class="k">continue</span>
+<span class="k">if</span> <span class="n">dev</span><span class="p">:</span>
+    <span class="n">vnm</span><span class="o">.</span><span class="n">SelectVnicForNicType</span><span class="p">(</span><span class="s">&#39;management&#39;</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Translate the Selected Vnic for the Management interface into its
+corresponding Vnic device name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mgmt_nic</span> <span class="o">=</span> <span class="n">vnm</span><span class="o">.</span><span class="n">QueryNetConfig</span><span class="p">(</span><span class="s">&#39;management&#39;</span><span class="p">)</span>
+<span class="n">dev</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">mgmt_nic</span><span class="o">.</span><span class="n">CandidateVnic</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">Key</span> <span class="o">==</span> <span class="n">mgmt_nic</span><span class="o">.</span><span class="n">SelectedVnic</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">dev</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">Device</span>
+        <span class="k">break</span>
+    <span class="k">continue</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Mangement Vnic Device Name: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Inflight Entertainment</a><ul>
+<li><a class="reference internal" href="#host-networking">Host Networking</a></li>
+<li><a class="reference internal" href="#data-objects">Data Objects</a></li>
+<li><a class="reference internal" href="#vnic-stuff">VNic Stuff</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mor.html"
+                        title="previous chapter">Crusing Altitude</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="further_reading.html"
+                        title="next chapter">Further Reading</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/networking.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="further_reading.html" title="Further Reading"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mor.html" title="Crusing Altitude"
+             >previous</a> |</li>
+        <li><a href="index.html">vCheck 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, John Hampton.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

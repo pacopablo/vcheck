@@ -1,0 +1,23 @@
+.. Links
+
+.. _HostVirtualNicManager: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNicManager.html
+.. _VirtualNicManagerNetConfig: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNicManager.NetConfig.html
+.. _HostVirtualNic: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.host.VirtualNic.html
+.. _HostSystem: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html
+.. _vMA: http://www.vmware.com/support/developer/vima/
+.. _vSphere CLI: http://www.vmware.com/support/developer/vcli/
+.. _PowerCLI: http://www.vmware.com/support/developer/PowerCLI/index.html
+.. _VIX API: http://www.vmware.com/support/developer/vix-api/
+.. _Web Services SDK: http://www.vmware.com/support/developer/vc-sdk/
+.. _IronPython: http://ironpython.codeplex.com/
+.. _wssdk: http://www.vmware.com/support/developer/vc-sdk/
+.. _ComputeResource: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.ComputeResource.html
+.. _Datacenter: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Datacenter.html
+.. _Datastore: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Datastore.html
+.. _DistributedVirtualSwitch: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.DistributedVirtualSwitch.html
+.. _Folder: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Folder.html
+.. _HostSystem: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html
+.. _Network: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Network.html
+.. _ResourcePool: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.ResourcePool.html
+.. _VirtualMachine: http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.VirtualMachine.html
+

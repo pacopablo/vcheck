@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to vCheck’s documentation! &mdash; vCheck 0.1 documentation</title>
+    <title>VMware vSphere Administration &mdash; vCheck 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="vCheck 0.1 documentation" href="#" /> 
+    <link rel="top" title="vCheck 0.1 documentation" href="#" />
+    <link rel="next" title="Pre-Flight Check" href="boilerplate.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,6 +35,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="boilerplate.html" title="Pre-Flight Check"
+             accesskey="N">next</a> |</li>
         <li><a href="#">vCheck 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -43,12 +47,75 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-vcheck-s-documentation">
-<h1>Welcome to vCheck&#8217;s documentation!<a class="headerlink" href="#welcome-to-vcheck-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+  <div class="section" id="vmware-vsphere-administration">
+<h1>VMware vSphere Administration<a class="headerlink" href="#vmware-vsphere-administration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>VMware vSphere can be managed via multiple means.  The most common of which is
+via the vSphere Client. Any setting can be configured via the vSphere Client.
+However, the vSphere Client is not geared for automation nor for repetitive
+tasks.</p>
+<p>Other options, geared more towards automation and repition are:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><a class="reference external" href="http://www.vmware.com/support/developer/vcli/">vSphere CLI</a></dt>
+<dd>Perl scripts that can be installed on Linux or Windows.  Many, but not
+all, tasks and settings can be manipulated via the CLI.</dd>
+<dt><a class="reference external" href="http://www.vmware.com/support/developer/vima/">vMA</a></dt>
+<dd>Virtual Machine with the <a class="reference external" href="http://www.vmware.com/support/developer/vcli/">vSphere CLI</a> preinstalled</dd>
+<dt><a class="reference external" href="http://www.vmware.com/support/developer/PowerCLI/index.html">PowerCLI</a></dt>
+<dd>PowerShell cmdlets for managing vSphere.  Also includes .NET assemblies.
+All tasks that can be done via the vSphere Client can be done via
+PowerShell or the .NET assemblies.  However, some tasks are cumbersome.</dd>
+<dt><a class="reference external" href="http://www.vmware.com/support/developer/vix-api/">VIX API</a></dt>
+<dd>High level API for Windows or Linux.  Bindings for C, Perl, and COM are
+provided.</dd>
+<dt><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/">Web Services SDK</a></dt>
+<dd>Complete Web API for managing all of vSphere.  The <a class="reference external" href="http://www.vmware.com/support/developer/PowerCLI/index.html">PowerCLI</a> and .NET
+bindings use the <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/">Web Services SDK</a>.</dd>
+</dl>
+</div></blockquote>
+<p>All of the options above have different trade-offs.  The <a class="reference external" href="http://www.vmware.com/support/developer/vcli/">vSphere CLI</a>,
+<a class="reference external" href="http://www.vmware.com/support/developer/vima/">vMA</a>, and <cite>VIX API</cite>  aren&#8217;t complete, though mostly so.  The <a class="reference external" href="http://www.vmware.com/support/developer/PowerCLI/index.html">PowerCLI</a> is
+cumbersome to use. The <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/">Web Services SDK</a> is complete, but complex.
+Especially if your chosen language doesn&#8217;t have a Web Services implementation.</p>
+<p>Fortunately, thanks to the advent of <a class="reference external" href="http://ironpython.codeplex.com/">IronPython</a>, the .NET assemblies can be
+used to access the <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/">Web Services SDK</a> without having to deal with the hassle
+that is PowerShell.</p>
+</div>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Provide information necessary to understand the way the VMware API works,
+especially with regrards to intergration with <a class="reference external" href="http://ironpython.codeplex.com/">IronPython</a>.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="boilerplate.html">Pre-Flight Check</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boilerplate.html#loading-assemblies">Loading Assemblies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boilerplate.html#connecting-to-vcenter">Connecting to vCenter</a></li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">Climbing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="entities.html#retrieving-managed-entities">Retrieving Managed Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entities.html#using-managed-object-service-providers">Using Managed Object <em>&#8220;service providers&#8221;</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mor.html">Crusing Altitude</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mor.html#managed-object-references">Managed Object References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="networking.html">Inflight Entertainment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="networking.html#host-networking">Host Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html#data-objects">Data Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html#vnic-stuff">VNic Stuff</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="further_reading.html">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -68,12 +135,20 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to vCheck&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">VMware vSphere Administration</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#contents">Contents:</a><ul>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
+  <h4>Next topic</h4>
+  <p class="topless"><a href="boilerplate.html"
+                        title="next chapter">Pre-Flight Check</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -102,6 +177,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="boilerplate.html" title="Pre-Flight Check"
+             >next</a> |</li>
         <li><a href="#">vCheck 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>

@@ -1,0 +1,156 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Glossary &mdash; vCheck 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="vCheck 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Further Reading" href="further_reading.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="further_reading.html" title="Further Reading"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">vCheck 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="glossary">
+<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary docutils">
+<dt id="term-data-object">Data Object</dt>
+<dd><em>Improve</em>: Holds the actual information about a specific piece of the system.  Data
+Objects don&#8217;t have methods <a class="footnote-reference" href="#id2" id="id1">[1]</a> and aren&#8217;t used to invoke operations on
+the vCenter server.  They are generally used as parameters which hold
+the information to update.</dd>
+<dt id="term-managed-entity">Managed Entity</dt>
+<dd><p class="first">Components that comprise the <strong>inventory</strong> of virtual components.  The
+known Managed Entities are:</p>
+<ul class="last simple">
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.ComputeResource.html">ComputeResource</a>; Represents a set of physical compute resources for a
+set of virtual machines.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Datacenter.html">Datacenter</a>: Provides the interface to the common container object for
+hosts, virtual machines, networks, and datastores.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Datastore.html">Datastore</a>: Represents a storage location for virtual machine files. A
+storage location can be a VMFS volume, a directory on Network Attached
+Storage, or a local file system path.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.DistributedVirtualSwitch.html">DistributedVirtualSwitch</a>: The interface to the distributed virtual
+switch objects.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Folder.html">Folder</a>: container for storing and organizing inventory objects.
+Folders can contain folders and other objects.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html">HostSystem</a>: provides access to a virtualization host platform.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Network.html">Network</a>: Represents a network accessible by either hosts or virtual
+machines. This can be a physical network or a logical network, such as
+a VLAN.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.ResourcePool.html">ResourcePool</a>: Represents a set of physical resources: a single host,
+a subset of a host&#8217;s resources, or resources spanning multiple hosts.</li>
+<li><a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.VirtualMachine.html">VirtualMachine</a>: VirtualMachine is the managed object type for
+manipulating virtual machines, including templates that can be
+deployed (repeatedly) as new virtual machines. This type provides</li>
+</ul>
+</dd>
+<dt id="term-managed-object">Managed Object</dt>
+<dd><p class="first">Core data structure to the VMware API.  There are two main categories:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#term-managed-entity"><em class="xref std std-term">Managed Entity</em></a>: compoents that comprise the
+inventory of virtual systems.</li>
+<li>Managed objects that provide services for the entire system.</li>
+</ul>
+<p class="last">More information on managed objects can be found in
+<a class="reference internal" href="further_reading.html#further-reading"><em>Further Reading</em></a>.</p>
+</dd>
+<dt id="term-managed-object-reference">Managed Object Reference</dt>
+<dd>A <a class="reference internal" href="#term-data-object"><em class="xref std std-term">Data Object</em></a> that provides a reference to the server-side objects used by
+client applications.</dd>
+</dl>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><em>Improve</em>: There may be a <a class="reference internal" href="#term-data-object"><em class="xref std std-term">Data Object</em></a> with methods, however, interaction
+with the SDK is generally done via <a class="reference internal" href="#term-managed-object-reference"><em class="xref std std-term">Managed Object Reference</em></a>s</td></tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="further_reading.html"
+                        title="previous chapter">Further Reading</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/glossary.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="further_reading.html" title="Further Reading"
+             >previous</a> |</li>
+        <li><a href="index.html">vCheck 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, John Hampton.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

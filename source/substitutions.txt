@@ -1,0 +1,9 @@
+.. |me| replace:: :term:`managed entity`
+.. |ME| replace:: :term:`Managed Entity`
+.. |mo| replace:: :term:`managed object`
+.. |MO| replace:: :term:`Managed Object`
+.. |do| replace:: :term:`data object`
+.. |DO| replace:: :term:`Data Object`
+.. |mor| replace:: :term:`managed object reference`
+.. |MOR| replace:: :term:`Managed Object Reference`
+.. |wssdk| replace:: `Web Services SDK`_

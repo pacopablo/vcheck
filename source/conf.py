@@ -240,3 +240,7 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+rst_prolog = open('substitutions.txt', 'rb').read()
+rst_epilog = open('links.txt', 'rb').read()
+
