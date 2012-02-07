@@ -8,5 +8,13 @@
 make html
 PWD=`pwd`
 PROJ_BASE=`basename "${PWD}"`
-cp -R * "~/Sites/${PROJ_BASE}"
+WWW_BASE="${HOME}/Sites"
+PUBLISH_PATH="${WWW_BASE}/${PROJ_BASE}"
+#echo "${PROJ_BASE}"
+#echo "${PUBLISH_PATH}"
+
+if [ ! -d "${PUBLISH_PATH}" ]; then
+	mkdir -p "${PUBLISH_PATH}"
+fi
+cp -R * "${PUBLISH_PATH}"
 
