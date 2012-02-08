@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pre-Flight Check &mdash; vCheck 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="vCheck 0.1 documentation" href="../index.html" />
+    <link rel="up" title="VMware vSphere Programming via Python" href="index.html" />
+    <link rel="next" title="Climbing" href="entities.html" />
+    <link rel="prev" title="VMware vSphere Programming via Python" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="entities.html" title="Climbing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="VMware vSphere Programming via Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">vCheck 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">VMware vSphere Programming via Python</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pre-flight-check">
+<h1>Pre-Flight Check<a class="headerlink" href="#pre-flight-check" title="Permalink to this headline">¶</a></h1>
+<p>Before any real work can be done, an IronPython Script needs to load the .NET
+assemblies and connect to a vCenter server or ESX(i) host.  Connecting to an
+ESXi server with a free license is possible.  However, while one can query the
+configuration, one can not change the configuration <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<div class="section" id="loading-assemblies">
+<h2>Loading Assemblies<a class="headerlink" href="#loading-assemblies" title="Permalink to this headline">¶</a></h2>
+<p>As with other .NET assemblies and IronPython, a reference needs to be added to
+the <tt class="docutils literal"><span class="pre">clr</span></tt>.  Additionally, the <tt class="docutils literal"><span class="pre">NameValueCollection</span></tt> is used in filters, so
+we need to import that as well. Finnaly, we import <tt class="docutils literal"><span class="pre">Arrary</span></tt> from <tt class="docutils literal"><span class="pre">System</span></tt>
+as it is used in many objects.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">clr</span>
+<span class="n">clr</span><span class="o">.</span><span class="n">AddReference</span><span class="p">(</span><span class="s">&#39;VMware.Vim&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">System.Collections.Specialized</span> <span class="kn">import</span> <span class="n">NameValueCollection</span>
+<span class="kn">from</span> <span class="nn">System</span> <span class="kn">import</span> <span class="n">Array</span>
+<span class="kn">import</span> <span class="nn">VMware.Vim</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="connecting-to-vcenter">
+<h2>Connecting to vCenter<a class="headerlink" href="#connecting-to-vcenter" title="Permalink to this headline">¶</a></h2>
+<p>When connecting to the vCenter (or ESXi) server, we need the <em>service URL</em> as
+well as login credentials. The steps for conencting are:</p>
+<ul class="simple">
+<li>Create a <tt class="docutils literal"><span class="pre">VimClient</span></tt> object</li>
+<li><tt class="docutils literal"><span class="pre">Connect</span></tt> to the <em>service URL</em></li>
+<li><tt class="docutils literal"><span class="pre">Login</span></tt> to the vCenter server.</li>
+</ul>
+<p>Example code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">VMware</span><span class="o">.</span><span class="n">Vim</span><span class="o">.</span><span class="n">VimClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&#39;https://vcenter.example.org/sdk&#39;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">Login</span><span class="p">(</span><span class="s">&#39;administrator&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As we can see, the <em>service URL</em> is simply the vCenter server with <tt class="docutils literal"><span class="pre">/sdk</span></tt>
+appended.  It is possible to configure the vCenter server for use over
+<tt class="docutils literal"><span class="pre">http://</span></tt>, but it is not recommended.</p>
+<p>Additionally, the <tt class="docutils literal"><span class="pre">client</span></tt> object becomes our main point of contact with the
+vCenter server.  Through the <tt class="docutils literal"><span class="pre">client</span></tt> object we can load Virtual Machine
+objects, Host objects, and other objects.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It may be possible to change some configuration options.  Networking
+changes result in a <em>RestrictedVersion</em> error.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pre-Flight Check</a><ul>
+<li><a class="reference internal" href="#loading-assemblies">Loading Assemblies</a></li>
+<li><a class="reference internal" href="#connecting-to-vcenter">Connecting to vCenter</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">VMware vSphere Programming via Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="entities.html"
+                        title="next chapter">Climbing</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/programming/boilerplate.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="entities.html" title="Climbing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="VMware vSphere Programming via Python"
+             >previous</a> |</li>
+        <li><a href="../index.html">vCheck 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >VMware vSphere Programming via Python</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, John Hampton.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

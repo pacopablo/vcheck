@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Climbing &mdash; vCheck 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="vCheck 0.1 documentation" href="../index.html" />
+    <link rel="up" title="VMware vSphere Programming via Python" href="index.html" />
+    <link rel="next" title="Crusing Altitude" href="mor.html" />
+    <link rel="prev" title="Pre-Flight Check" href="boilerplate.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mor.html" title="Crusing Altitude"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="boilerplate.html" title="Pre-Flight Check"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">vCheck 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">VMware vSphere Programming via Python</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="climbing">
+<h1>Climbing<a class="headerlink" href="#climbing" title="Permalink to this headline">¶</a></h1>
+<p>Once connected to the vCenter server via a <tt class="docutils literal"><span class="pre">VimClient</span></tt>, we can begin work.
+When working with vCenter, we are dealing with two types of objects: <a class="reference internal" href="../glossary.html#term-managed-object"><em class="xref std std-term">managed object</em></a>s,
+and <a class="reference internal" href="../glossary.html#term-data-object"><em class="xref std std-term">data object</em></a>s.</p>
+<p><a class="reference internal" href="../glossary.html#term-managed-object"><em class="xref std std-term">Managed Object</em></a>s come in two varieties: Managed Entities and Managed Object <em>&#8220;service
+providers&#8221;</em>.  Managed Entities represent pieces of <strong>inventory</strong> such as
+<a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.HostSystem.html">HostSystem</a>, <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.VirtualMachine.html">VirtualMachine</a>, and <a class="reference external" href="http://www.vmware.com/support/developer/vc-sdk/visdk41pubs/ApiReference/vim.Datastore.html">Datastore</a>. Managed Object <em>&#8220;service
+providers&#8221;</em> are properties of <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">managed entity</em></a>s and provide <a class="reference internal" href="../glossary.html#term-managed-object-reference"><em class="xref std std-term">managed object reference</em></a>s needed to interact
+with vCenter. begins with retreiving a <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">Managed Entity</em></a> object:</p>
+<div class="section" id="retrieving-managed-entities">
+<h2>Retrieving Managed Entities<a class="headerlink" href="#retrieving-managed-entities" title="Permalink to this headline">¶</a></h2>
+<p>To find a <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">managed entity</em></a> we use the <tt class="docutils literal"><span class="pre">FindEntityView</span></tt> or <tt class="docutils literal"><span class="pre">FindEntityViews</span></tt> method of
+the <tt class="docutils literal"><span class="pre">VimClient</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">hosts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FindEntityViews</span><span class="p">(</span><span class="n">VMware</span><span class="o">.</span><span class="n">Vim</span><span class="o">.</span><span class="n">HostSystem</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <tt class="docutils literal"><span class="pre">VMware.Vim.HostSystem</span></tt> is a <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">Managed Entity</em></a>.  The available entities are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ComputeResource</span></tt>: Represents a set of physical compute resources for a
+set of virtual machines.</li>
+<li><tt class="docutils literal"><span class="pre">Datacenter</span></tt>: Provides the interface to the common container object for
+hosts, virtual machines, networks, and datastores.</li>
+<li><tt class="docutils literal"><span class="pre">Datastore</span></tt>: Represents a storage location for virtual machine files. A
+storage location can be a VMFS volume, a directory on Network Attached
+Storage, or a local file system path.</li>
+<li><tt class="docutils literal"><span class="pre">DistributedVirtualSwitch</span></tt>: The interface to the distributed virtual
+switch objects.</li>
+<li><tt class="docutils literal"><span class="pre">Folder</span></tt>: container for storing and organizing inventory objects.
+Folders can contain folders and other objects.</li>
+<li><tt class="docutils literal"><span class="pre">HostSystem</span></tt>: provides access to a virtualization host platform.</li>
+<li><tt class="docutils literal"><span class="pre">Network</span></tt>: Represents a network accessible by either hosts or virtual
+machines. This can be a physical network or a logical network, such as
+a VLAN.</li>
+<li><tt class="docutils literal"><span class="pre">ResourcePool</span></tt>: Represents a set of physical resources: a single host,
+a subset of a host&#8217;s resources, or resources spanning multiple hosts.</li>
+<li><tt class="docutils literal"><span class="pre">VirtualMachine</span></tt>: VirtualMachine is the managed object type for
+manipulating virtual machines, including templates that can be
+deployed (repeatedly) as new virtual machines. This type provides
+methods for configuring and controlling a virtual machine.</li>
+</ul>
+<p>We can also use filters to limit the results of <tt class="docutils literal"><span class="pre">FindEntityViews</span></tt>.  For
+example, if we only want hosts that have a name of  <em>esxi.example.org</em> we can
+create a filter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">filter</span> <span class="o">=</span> <span class="n">NameValueCollection</span><span class="p">()</span>
+<span class="nb">filter</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span> <span class="s">&quot;esxi.example.org&quot;</span><span class="p">)</span>
+<span class="n">hosts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FindEntityViews</span><span class="p">(</span><span class="n">VMware</span><span class="o">.</span><span class="n">Vim</span><span class="o">.</span><span class="n">HostSystem</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additionally, regexes can be used in the filter.  When using a filter, one
+must be careful regarding the key used.  It must match a property path.  I am
+not aware of a document or method for determining all of the property paths
+available.</p>
+</div>
+<div class="section" id="using-managed-object-service-providers">
+<h2>Using Managed Object <em>&#8220;service providers&#8221;</em><a class="headerlink" href="#using-managed-object-service-providers" title="Permalink to this headline">¶</a></h2>
+<p>Once we ahve a <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">managed entity</em></a>, we can begin to look at both the configuration values, as
+well as manipulate settings on the vCenter server.  <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">Managed Entity</em></a>s contain Managed
+Object <em>&#8220;service providers&#8221;</em>.  The <em>&#8220;service providers&#8221;</em>, in turn, contain
+<a class="reference internal" href="mor.html#mor"><em>Managed Object References (MORs)</em></a> which are used to manipulate the
+settings on the vCenter server.</p>
+<p>For most of our work we will be mainly interested in the <tt class="docutils literal"><span class="pre">ConfigManager</span></tt>
+<em>&#8220;service provider&#8221;</em> of the <tt class="docutils literal"><span class="pre">HostSystem</span></tt> <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">managed entity</em></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">hosts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;VMware.Vim.HostSystem object at 0x000000000000017B [VMware.Vim.HostSystem]&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="n">hosts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ConfigManager</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span>
+<span class="go">&lt;VMware.Vim.HostConfigManager object at 0x000000000000017C [VMware.Vim.HostConfigManager]&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span><span class="o">.</span><span class="n">NetworkSystem</span>
+<span class="go">&lt;VMware.Vim.ManagedObjectReference object at 0x000000000000017D [HostNetworkSystem-networkSystem-45]&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Climbing</a><ul>
+<li><a class="reference internal" href="#retrieving-managed-entities">Retrieving Managed Entities</a></li>
+<li><a class="reference internal" href="#using-managed-object-service-providers">Using Managed Object <em>&#8220;service providers&#8221;</em></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="boilerplate.html"
+                        title="previous chapter">Pre-Flight Check</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mor.html"
+                        title="next chapter">Crusing Altitude</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/programming/entities.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mor.html" title="Crusing Altitude"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="boilerplate.html" title="Pre-Flight Check"
+             >previous</a> |</li>
+        <li><a href="../index.html">vCheck 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >VMware vSphere Programming via Python</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, John Hampton.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
