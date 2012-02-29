@@ -79,15 +79,21 @@ def main(opts):
     username = conf.get_value(opts, config, 'username')
     password = conf.get_value(opts, config, 'password', secret=True)
 
-    vim_client = api.connect(serviceURL, username, password)
-    if opts.action == 'verify':
-        verify.do_verify(config, opts, vim_client)
-    elif opts.action == 'pillage':
-        pillage.do_pillage(config, opts, vim_client)
-    elif opts.action == 'repair':
-        repair.do_repair(config, opts, vim_client)
-    vim_client.Disconnect()
-    rc = 0
+    try:
+        vim_client = api.connect(serviceURL, username, password)
+   
+        if opts.action == 'verify':
+            verify.do_verify(config, opts, vim_client)
+        elif opts.action == 'pillage':
+            pillage.do_pillage(config, opts, vim_client)
+        elif opts.action == 'repair':
+            repair.do_repair(config, opts, vim_client)
+        vim_client.Disconnect()
+        rc = 0
+    except SystemError, e:
+        print(str(e.args))
+        rc = 1
+   
     return rc
 
 if __name__ == '__main__':

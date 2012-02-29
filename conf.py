@@ -20,6 +20,8 @@ from ipgetpass import getpass
 __all__ = ['load_config', 'get_value']
 
 configspec = """
+[global]
+
 [vswitch]
 [[__many__]]
 ___many___ = voption('string')

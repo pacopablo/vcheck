@@ -5,3 +5,5 @@ docs/_build/
 dist/
 build/
 .build/
+*.suo
+*.user
