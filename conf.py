@@ -25,16 +25,16 @@ configspec = """
 [vswitch]
 [[__many__]]
 ___many___ = voption('string')
-Spec.Policy.NicTeaming.Policy = voption('string(default="loadbalance_srcid")')
-Spec.Policy.Security.MacChanges = voption('boolean(default=None)')
 Spec.NumPorts = voption('integer(default=None)')
 Spec.Mtu = voption('integer(default=None)')
 Name = voption('string')
+Spec.Policy.NicTeaming.Policy = voption('string(default="loadbalance_srcid")')
 Spec.Policy.NicTeaming.NicOrder.StandbyNic = voption('string(default=None)')
 Spec.Policy.NicTeaming.NicOrder.ActiveNic = voption('string_list')
+Spec.Policy.Security.MacChanges = voption('boolean(default=None)')
 Spec.Policy.Security.AllowPromiscuous = voption('boolean(default=None)')
 Spec.Policy.Security.ForgedTransmits = voption('boolean(default=None)')
-
+Spec.Policy.ShapingPolicy.Enabled = voption('boolean(default=False)')
 [portgroup]
 [[__many__]]
 ___many___ = voption('string')
