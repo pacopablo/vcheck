@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="api.py" />
+    <Compile Include="boilerplate.py" />
     <Compile Include="conf.py" />
     <Compile Include="configobj.py" />
     <Compile Include="debug.py" />
