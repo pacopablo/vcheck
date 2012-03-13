@@ -66,7 +66,7 @@ with vCenter. begins with retreiving a <a class="reference internal" href="../gl
 <div class="section" id="retrieving-managed-entities">
 <h2>Retrieving Managed Entities<a class="headerlink" href="#retrieving-managed-entities" title="Permalink to this headline">¶</a></h2>
 <p>To find a <a class="reference internal" href="../glossary.html#term-managed-entity"><em class="xref std std-term">managed entity</em></a> we use the <tt class="docutils literal"><span class="pre">FindEntityView</span></tt> or <tt class="docutils literal"><span class="pre">FindEntityViews</span></tt> method of
-the <tt class="docutils literal"><span class="pre">VimClient</span></tt>.</p>
+the <tt class="docutils literal"><span class="pre">VimClient</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">hosts</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">FindEntityViews</span><span class="p">(</span><span class="n">VMware</span><span class="o">.</span><span class="n">Vim</span><span class="o">.</span><span class="n">HostSystem</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>

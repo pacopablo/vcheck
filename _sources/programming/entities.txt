@@ -16,13 +16,9 @@ Retrieving Managed Entities
 ===========================
 
 To find a |me| we use the ``FindEntityView`` or ``FindEntityViews`` method of
-the ``VimClient``.
+the ``VimClient``::
 
-::
-
-  hosts = client.FindEntityViews(VMware.Vim.HostSystem, None, None, None)
-
-
+ hosts = client.FindEntityViews(VMware.Vim.HostSystem, None, None, None)
 
 A ``VMware.Vim.HostSystem`` is a |ME|.  The available entities are:
 

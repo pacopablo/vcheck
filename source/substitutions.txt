@@ -7,3 +7,6 @@
 .. |mor| replace:: :term:`managed object reference`
 .. |MOR| replace:: :term:`Managed Object Reference`
 .. |wssdk| replace:: `Web Services SDK`_
+.. |datacenterapi| replace:: :ref:`datacenter_api`
+.. |hostapi| replace:: :ref:`host_api`
+.. |vmapi| replace:: :ref:`vm_api`
