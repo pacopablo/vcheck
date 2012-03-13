@@ -31,7 +31,7 @@ file::
 Structure
 ---------
 
-The documentation is split into three secions:
+The documentation is split into three sections:
 
 1. Command usage
 2. Code documentation
