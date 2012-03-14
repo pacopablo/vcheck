@@ -40,8 +40,15 @@
     <Compile Include="ipgetpass.py" />
     <Compile Include="pillage.py" />
     <Compile Include="repair.py" />
+    <Compile Include="setup.py" />
     <Compile Include="validate.py" />
     <Compile Include="verify.py" />
+    <Compile Include="vmware\connection.py" />
+    <Compile Include="vmware\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="vmware\" />
+    <Folder Include="scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
