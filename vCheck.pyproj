@@ -44,6 +44,7 @@
     <Compile Include="validate.py" />
     <Compile Include="verify.py" />
     <Compile Include="vmware\connection.py" />
+    <Compile Include="vmware\host.py" />
     <Compile Include="vmware\__init__.py" />
   </ItemGroup>
   <ItemGroup>

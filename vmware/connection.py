@@ -51,9 +51,16 @@ class VimConnection(object):
     """
 
     def __init__(url, username, password):
+        self.url = url
+        self.username = username
+        self.password = password
         self.connection = VMware.Vim.VimClient()
         self.connection.Connect(url)
         self.connection.Login(username, password)
 
+    def reconnect():
+        """ Reconnects the ``VMWare.Vim.VimClient`` """
+
+        self.connection.Login(usrname, password)
 
     
