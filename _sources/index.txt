@@ -43,8 +43,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   api/objects
    programming/index
+   api/index
 
    further_reading
    glossary
